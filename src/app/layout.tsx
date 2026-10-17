@@ -79,7 +79,7 @@ export default function RootLayout({
     '@type': 'Person',
     name: 'Ravi Kumar Verma',
     jobTitle: 'Full-Stack Developer & Product Engineer',
-    url: 'https://ravikumarverma.dev',
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://github.com/rkravikr',
     sameAs: [
       'https://github.com/rkravikr',
       'https://linkedin.com/in/rkravikr',
