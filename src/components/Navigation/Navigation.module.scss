@@ -1,0 +1,190 @@
+@use '../../styles/tokens' as *;
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-nav;
+  padding: $space-lg 0;
+  transition: background-color $duration-base $ease-out-quart,
+              padding $duration-base $ease-out-quart;
+}
+
+.scrolled {
+  @include glass-surface;
+  padding: $space-md 0;
+}
+
+.inner {
+  @include container;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name {
+  font-family: $font-display;
+  font-size: $text-sm;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: $text-primary;
+  transition: opacity $duration-fast;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.desktopLinks {
+  display: none;
+  align-items: center;
+  gap: $space-2xl;
+
+  @include respond-above($bp-desktop) {
+    display: flex;
+  }
+}
+
+.link {
+  @include label-text;
+  color: $text-secondary;
+  position: relative;
+  transition: color $duration-fast;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: $color-lavender;
+    transition: width $duration-base $ease-out-expo;
+  }
+
+  &:hover {
+    color: $text-primary;
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+.resumeLink {
+  @include label-text;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  color: $color-lavender;
+  padding: $space-xs $space-md;
+  border: 1px solid $border-accent;
+  transition: all $duration-fast ease;
+
+  &:hover {
+    background: rgba(181, 166, 255, 0.12);
+    border-color: $color-lavender;
+    color: $text-primary;
+  }
+}
+
+// ─── Mobile Toggle ───
+.toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: $space-sm;
+  position: relative;
+  z-index: $z-nav + 1;
+
+  @include respond-above($bp-desktop) {
+    display: none;
+  }
+}
+
+.bar {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: $text-primary;
+  transition: transform $duration-base $ease-out-expo,
+              opacity $duration-fast;
+  transform-origin: center;
+}
+
+.active {
+  .bar:first-child {
+    transform: translateY(3.75px) rotate(45deg);
+  }
+  .bar:last-child {
+    transform: translateY(-3.75px) rotate(-45deg);
+  }
+}
+
+// ─── Mobile Menu ───
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: $z-nav - 1;
+  background: $surface-bg;
+  clip-path: inset(0 0 100% 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include respond-above($bp-desktop) {
+    display: none;
+  }
+}
+
+.menuInner {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl;
+  padding: $space-3xl;
+}
+
+.menuLink {
+  display: flex;
+  align-items: baseline;
+  gap: $space-lg;
+  text-decoration: none;
+  opacity: 0;
+}
+
+.menuIndex {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+}
+
+.menuLabel {
+  font-family: $font-display;
+  font-size: $text-3xl;
+  font-weight: 500;
+  color: $text-primary;
+  transition: color $duration-fast;
+
+  .menuLink:hover & {
+    color: $color-lavender;
+  }
+}
+
+.menuFooter {
+  display: flex;
+  gap: $space-xl;
+  margin-top: $space-3xl;
+  padding-top: $space-xl;
+  border-top: 1px solid $border-subtle;
+
+  a {
+    @include label-text;
+    color: $text-secondary;
+    transition: color $duration-fast;
+
+    &:hover {
+      color: $color-lavender;
+    }
+  }
+}

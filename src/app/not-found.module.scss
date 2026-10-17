@@ -1,0 +1,103 @@
+@use '../styles/tokens' as *;
+
+.notFound {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: $space-3xl $container-padding;
+  background-color: $surface-bg;
+}
+
+.atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.glowOrb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(600px, 80vw);
+  height: min(600px, 80vw);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 59, 70, 0.08) 0%,
+    rgba(181, 166, 255, 0.05) 45%,
+    transparent 70%
+  );
+  filter: blur(50px);
+}
+
+.container {
+  @include container;
+  max-width: 700px;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.label {
+  @include label-text;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  color: $color-red;
+  margin-bottom: $space-xl;
+  padding: $space-xs $space-md;
+  border: 1px solid rgba(255, 59, 70, 0.25);
+  background: rgba(255, 59, 70, 0.05);
+}
+
+.heading {
+  font-family: $font-display;
+  font-size: clamp(3rem, 2.5rem + 4vw, 6rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: $text-primary;
+  margin-bottom: $space-lg;
+
+  span {
+    color: $color-lavender;
+  }
+}
+
+.description {
+  font-family: $font-body;
+  font-size: $text-lg;
+  color: $text-secondary;
+  line-height: 1.7;
+  margin: 0 auto $space-3xl;
+  max-width: 500px;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $text-primary;
+  padding: $space-md $space-2xl;
+  border: 1px solid $border-medium;
+  background: $surface-elevated;
+  transition: all $duration-base $ease-out-expo;
+
+  &:hover {
+    color: $surface-bg;
+    background: $color-lavender;
+    border-color: $color-lavender;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}

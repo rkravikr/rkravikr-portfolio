@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="6" fill="#08090B"/>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke="#F1F0EB" stroke-opacity="0.15" fill="none"/>
+  <!-- Stylized Monogram R -->
+  <path d="M9 7h6.5a4.5 4.5 0 0 1 0 9H9V7zm0 9h6l4.5 9H15l-3.5-7H9v7H6V7h3v9z" fill="#F1F0EB"/>
+  <!-- Signal Accent Dot -->
+  <circle cx="23.5" cy="8.5" r="2.5" fill="#B5A6FF"/>
+</svg>

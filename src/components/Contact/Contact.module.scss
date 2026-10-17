@@ -1,0 +1,149 @@
+@use '../../styles/tokens' as *;
+
+.contact {
+  @include section-spacing;
+  position: relative;
+  padding-bottom: clamp(6rem, 12vh, 12rem);
+}
+
+.container {
+  @include container;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  margin-bottom: $space-xl;
+
+  span:last-child {
+    @include label-text;
+  }
+}
+
+.chapterNum {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $color-lavender;
+  letter-spacing: 0.1em;
+}
+
+.heading {
+  font-size: $text-4xl;
+  font-weight: 500;
+  margin-bottom: $space-2xl;
+  opacity: 0;
+}
+
+.accent {
+  color: $color-lavender;
+}
+
+.description {
+  font-size: $text-lg;
+  color: $text-secondary;
+  line-height: 1.8;
+  max-width: 55ch;
+  margin-bottom: $space-4xl;
+  opacity: 0;
+}
+
+// ─── Contact Links ───
+.links {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-md;
+  max-width: 600px;
+
+  @include respond-above($bp-tablet) {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: none;
+  }
+}
+
+.linkCard {
+  display: flex;
+  align-items: center;
+  gap: $space-lg;
+  padding: $space-xl;
+  background: $surface-elevated;
+  border: 1px solid $border-subtle;
+  transition: all $duration-base $ease-out-expo;
+  text-decoration: none;
+  opacity: 0;
+
+  @include respond-above($bp-tablet) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-xl;
+  }
+
+  &:hover {
+    border-color: $border-accent;
+    background: $surface-elevated-2;
+    transform: translateY(-4px);
+
+    .linkArrow {
+      transform: translate(2px, -2px);
+      color: $color-lavender;
+    }
+
+    .linkIcon {
+      color: $color-lavender;
+    }
+  }
+}
+
+.linkIcon {
+  color: $text-muted;
+  transition: color $duration-base;
+  flex-shrink: 0;
+}
+
+.linkInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.linkLabel {
+  @include label-text;
+  font-size: 0.6rem;
+}
+
+.linkValue {
+  font-family: $font-body;
+  font-size: $text-sm;
+  color: $text-primary;
+  font-weight: 400;
+}
+
+.linkArrow {
+  color: $text-muted;
+  transition: all $duration-fast;
+  flex-shrink: 0;
+}
+
+// ─── Atmospheric Glow ───
+.bottomGlow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 200px;
+  background: radial-gradient(
+    ellipse at center bottom,
+    rgba(181, 166, 255, 0.04) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+@include reduced-motion {
+  .heading, .description, .linkCard {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

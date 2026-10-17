@@ -1,0 +1,247 @@
+@use '../../styles/tokens' as *;
+
+.projects {
+  @include section-spacing;
+  position: relative;
+}
+
+.container {
+  @include container;
+}
+
+.header {
+  margin-bottom: $space-4xl;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  margin-bottom: $space-xl;
+
+  span:last-child {
+    @include label-text;
+  }
+}
+
+.chapterNum {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $color-lavender;
+  letter-spacing: 0.1em;
+}
+
+.sectionHeading {
+  font-size: $text-4xl;
+  font-weight: 500;
+  opacity: 0;
+}
+
+.accent {
+  color: $color-lavender;
+}
+
+// ─── Project Grid ───
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-2xl;
+
+  @include respond-above($bp-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// ─── Project Card ───
+.projectCard {
+  position: relative;
+  background: $surface-elevated;
+  border: 1px solid $border-subtle;
+  overflow: hidden;
+  opacity: 0;
+  transition: border-color $duration-base $ease-out-quart,
+              transform $duration-base $ease-out-expo;
+
+  &:hover {
+    border-color: $border-medium;
+    transform: translateY(-4px);
+  }
+
+  @include respond-above($bp-tablet) {
+    &.featured {
+      grid-column: span 1;
+    }
+  }
+}
+
+// ─── Abstract Visual ───
+.visual {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.visualInner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-lg;
+  padding: $space-xl;
+}
+
+.projectInitial {
+  font-family: $font-display;
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 600;
+  color: rgba(241, 240, 235, 0.04);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  user-select: none;
+}
+
+.visualGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-xs;
+  justify-content: center;
+}
+
+.visualFeature {
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  color: $text-muted;
+  padding: 2px $space-sm;
+  border: 1px solid $border-subtle;
+  letter-spacing: 0.05em;
+}
+
+// ─── Card Content ───
+.cardContent {
+  padding: $space-xl;
+
+  @include respond-above($bp-desktop) {
+    padding: $space-2xl;
+  }
+}
+
+.cardMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $space-md;
+}
+
+.cardCategory {
+  @include label-text;
+  font-size: 0.65rem;
+  color: $color-lavender;
+}
+
+.cardYear {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+}
+
+.cardTitle {
+  font-family: $font-display;
+  font-size: $text-2xl;
+  font-weight: 500;
+  margin-bottom: $space-xs;
+  line-height: 1.2;
+}
+
+.cardTagline {
+  font-family: $font-body;
+  font-size: $text-sm;
+  color: $text-accent;
+  margin-bottom: $space-lg;
+  font-weight: 400;
+}
+
+.cardDescription {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: 1.7;
+  margin-bottom: $space-lg;
+}
+
+// ─── Tech Stack ───
+.techStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+  margin-bottom: $space-lg;
+}
+
+.techItem {
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  color: $text-muted;
+  padding: 3px $space-sm;
+  border: 1px solid $border-subtle;
+  letter-spacing: 0.05em;
+  transition: all $duration-fast;
+
+  .projectCard:hover & {
+    border-color: $border-medium;
+  }
+}
+
+.narrative {
+  font-family: $font-body;
+  font-size: $text-sm;
+  font-style: italic;
+  color: $text-muted;
+  line-height: 1.7;
+  margin-bottom: $space-xl;
+  padding-left: $space-md;
+  border-left: 1px solid $border-subtle;
+}
+
+// ─── Links ───
+.cardLinks {
+  display: flex;
+  gap: $space-md;
+  padding-top: $space-md;
+  border-top: 1px solid $border-subtle;
+}
+
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  font-family: $font-mono;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $text-secondary;
+  padding: $space-sm $space-md;
+  border: 1px solid $border-subtle;
+  transition: all $duration-fast $ease-out-quart;
+
+  &:hover {
+    color: $text-primary;
+    border-color: $border-medium;
+    background: rgba(241, 240, 235, 0.03);
+  }
+}
+
+.liveLinkStyle {
+  &:hover {
+    color: $color-lavender;
+    border-color: $border-accent;
+  }
+}
+
+@include reduced-motion {
+  .projectCard,
+  .sectionHeading {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

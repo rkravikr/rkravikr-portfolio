@@ -1,0 +1,206 @@
+@use '../../styles/tokens' as *;
+
+.process {
+  @include section-spacing;
+  position: relative;
+  background: $surface-elevated;
+  border-top: 1px solid $border-subtle;
+  border-bottom: 1px solid $border-subtle;
+}
+
+.container {
+  @include container;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  margin-bottom: $space-xl;
+
+  span:last-child {
+    @include label-text;
+  }
+}
+
+.chapterNum {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $color-lavender;
+  letter-spacing: 0.1em;
+}
+
+.heading {
+  font-size: $text-4xl;
+  font-weight: 500;
+  margin-bottom: $space-4xl;
+  opacity: 0;
+}
+
+.accent {
+  color: $color-lavender;
+}
+
+// ─── Layout ───
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-4xl;
+
+  @include respond-above($bp-desktop) {
+    grid-template-columns: 1fr 1fr;
+    gap: $space-5xl;
+  }
+}
+
+// ─── Steps ───
+.steps {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+  padding-left: $space-2xl;
+}
+
+.connectorWrap {
+  position: absolute;
+  left: 5px;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+}
+
+.connector {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, $color-lavender, $border-subtle);
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+.step {
+  position: relative;
+  opacity: 0;
+}
+
+.stepDot {
+  position: absolute;
+  left: calc(-#{$space-2xl} - 1px);
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid $color-lavender;
+  background: $surface-elevated;
+  z-index: 2;
+}
+
+.stepContent {
+  // Step text container
+}
+
+.stepHeader {
+  display: flex;
+  align-items: baseline;
+  gap: $space-md;
+  margin-bottom: $space-sm;
+}
+
+.stepNum {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $color-lavender;
+}
+
+.stepTitle {
+  font-family: $font-display;
+  font-size: $text-xl;
+  font-weight: 500;
+}
+
+.stepDesc {
+  font-size: $text-sm;
+  color: $text-secondary;
+  line-height: 1.7;
+  max-width: 45ch;
+}
+
+// ─── Skills Sidebar ───
+.skills {
+  padding: $space-2xl;
+  background: $surface-bg;
+  border: 1px solid $border-subtle;
+
+  @include respond-above($bp-desktop) {
+    align-self: start;
+    position: sticky;
+    top: 120px;
+  }
+}
+
+.skillsTitle {
+  @include label-text;
+  margin-bottom: $space-xl;
+  color: $text-primary;
+  font-size: $text-sm;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-family: $font-display;
+}
+
+.skillGroup {
+  margin-bottom: $space-lg;
+  padding-bottom: $space-lg;
+  border-bottom: 1px solid $border-subtle;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.skillCategory {
+  @include label-text;
+  font-size: 0.6rem;
+  display: block;
+  margin-bottom: $space-sm;
+  color: $color-lavender;
+}
+
+.skillList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-xs;
+}
+
+.skillItem {
+  font-family: $font-mono;
+  font-size: 0.7rem;
+  color: $text-secondary;
+  padding: 2px $space-sm;
+  border: 1px solid $border-subtle;
+  transition: all $duration-fast;
+
+  &:hover {
+    color: $text-primary;
+    border-color: $border-medium;
+  }
+}
+
+.disclaimer {
+  margin-top: $space-lg;
+  font-size: 0.7rem;
+  font-style: italic;
+  color: $text-muted;
+  line-height: 1.6;
+}
+
+@include reduced-motion {
+  .heading, .step {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .connector {
+    transform: scaleY(1) !important;
+  }
+}
