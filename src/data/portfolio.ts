@@ -149,6 +149,7 @@ export const projects: Project[] = [
     category: 'Developer Tool',
     tech: ['Next.js', 'React', 'Tailwind CSS', 'shadcn/ui', 'Framer Motion'],
     repo: 'https://github.com/rkravikr/calcify-mastery',
+    live: 'https://calcify-mastery.vercel.app/',
     image: '/images/calcify-mastery.png',
     narrative:
       'Shows how a collection of small, focused tools can become a coherent utility product.',
@@ -172,6 +173,7 @@ export const projects: Project[] = [
     category: 'E-Commerce',
     tech: ['React', 'Vite', 'Node.js', 'Express.js', 'PostgreSQL', 'Prisma', 'Cloudinary'],
     repo: 'https://github.com/rkravikr/shree-bags',
+    live: 'https://shree-bags-ten.vercel.app/',
     image: '/images/shree-bags.png',
     narrative:
       'Shows how software can address a practical business need through a focused storefront and manageable product catalog.',
@@ -195,6 +197,7 @@ export const projects: Project[] = [
     category: 'Business Website',
     tech: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     repo: 'https://github.com/rkravikr/ajay-press-v2',
+    live: 'https://ajay-press-v1.vercel.app/',
     image: '/images/ajay-press-v1.png',
     narrative:
       'Demonstrates how a business website can make services easier to understand and customer contact easier to initiate.',
@@ -218,6 +221,7 @@ export const projects: Project[] = [
     category: 'Business Website',
     tech: ['React', 'TypeScript', 'Vite'],
     repo: 'https://github.com/rkravikr/nisarga-grand',
+    live: 'https://nisarga-grand.vercel.app/',
     image: '/images/nisarga-grand.png',
     narrative:
       'Documents business problem-solving through web development for the restaurant industry.',
