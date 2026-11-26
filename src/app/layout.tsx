@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
+import { siteUrl } from '@/lib/site';
+import { profile } from '@/data/portfolio';
 import './globals.scss';
 
 const spaceGrotesk = Space_Grotesk({
@@ -23,36 +25,47 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ['400'],
 });
 
+const seoTitle = 'Ravi Kumar Verma | Software Developer & Portfolio';
+const seoDescription =
+  'Official portfolio of Ravi Kumar Verma, a software developer focused on full-stack development, modern web technologies, and building digital products.';
+
 export const metadata: Metadata = {
-  title: 'Ravi Kumar Verma — Full-Stack Developer & Product Engineer',
-  description:
-    'Personal portfolio of Ravi Kumar Verma — a Computer Science Engineering student, full-stack developer, and product-oriented software engineer building practical web applications from Bengaluru, India.',
+  metadataBase: new URL(siteUrl),
+  title: seoTitle,
+  description: seoDescription,
+  alternates: {
+    canonical: '/',
+  },
   keywords: [
     'Ravi Kumar Verma',
+    'Ravi Kumar Verma Developer',
+    'Ravi Kumar Verma Portfolio',
+    'Ravi Kumar Verma GitHub',
+    'Software Developer',
     'Full-Stack Developer',
-    'Product Engineer',
-    'Web Developer',
     'React',
     'Next.js',
+    'JavaScript',
     'TypeScript',
-    'Portfolio',
+    'Python',
+    'Supabase',
     'Bengaluru',
   ],
-  authors: [{ name: 'Ravi Kumar Verma' }],
-  creator: 'Ravi Kumar Verma',
+  authors: [{ name: profile.name, url: siteUrl }],
+  creator: profile.name,
+  publisher: profile.name,
   openGraph: {
     type: 'website',
     locale: 'en_IN',
-    title: 'Ravi Kumar Verma — Full-Stack Developer & Product Engineer',
-    description:
-      'Personal portfolio of Ravi Kumar Verma — building practical web applications and products.',
-    siteName: 'Ravi Kumar Verma',
+    url: siteUrl,
+    title: seoTitle,
+    description: seoDescription,
+    siteName: profile.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ravi Kumar Verma — Full-Stack Developer & Product Engineer',
-    description:
-      'Personal portfolio of Ravi Kumar Verma — building practical web applications and products.',
+    title: seoTitle,
+    description: seoDescription,
   },
   icons: {
     icon: '/favicon.svg',
@@ -65,6 +78,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
     },
   },
 };
@@ -74,34 +90,52 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const jsonLd = {
+  const personJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Ravi Kumar Verma',
-    jobTitle: 'Full-Stack Developer & Product Engineer',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://github.com/rkravikr',
+    '@id': `${siteUrl}/#person`,
+    name: profile.name,
+    url: siteUrl,
+    image: `${siteUrl}/images/profile_pic_portfolio.png`,
+    jobTitle: 'Software Developer & Full-Stack Developer',
+    description: seoDescription,
     sameAs: [
-      'https://github.com/rkravikr',
-      'https://linkedin.com/in/rkravikr',
+      siteUrl,
+      profile.links.linkedin,
+      profile.links.github,
     ],
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Bengaluru',
       addressRegion: 'Karnataka',
-      addressCountry: 'India',
+      addressCountry: 'IN',
     },
     alumniOf: {
       '@type': 'EducationalOrganization',
-      name: 'Atria Institute of Technology',
+      name: profile.education.institution,
     },
     knowsAbout: [
-      'Web Development',
       'React',
       'Next.js',
+      'JavaScript',
       'TypeScript',
+      'Python',
+      'Supabase',
       'Node.js',
-      'Product Engineering',
+      'PostgreSQL',
+      'Full-Stack Development',
     ],
+  };
+
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${siteUrl}/#website`,
+    name: `${profile.name} Portfolio`,
+    url: siteUrl,
+    author: {
+      '@id': `${siteUrl}/#person`,
+    },
   };
 
   return (
@@ -112,7 +146,9 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([personJsonLd, websiteJsonLd]),
+          }}
         />
       </head>
       <body>{children}</body>

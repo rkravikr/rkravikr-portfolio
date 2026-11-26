@@ -1,0 +1,450 @@
+@use '../../styles/tokens' as *;
+
+.section {
+  @include section-spacing;
+  position: relative;
+  overflow: hidden;
+}
+
+.ambientGlow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  @include container;
+  position: relative;
+  z-index: 2;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-3xl;
+  align-items: start;
+
+  @include respond-above($bp-desktop) {
+    grid-template-columns: 0.9fr 1.3fr;
+    gap: $space-5xl;
+  }
+}
+
+// ─── Left Column ───
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+
+  @include respond-above($bp-desktop) {
+    position: sticky;
+    top: 7.5rem;
+  }
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  margin-bottom: $space-xl;
+}
+
+.chapterNum {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $color-lavender;
+  letter-spacing: 0.1em;
+}
+
+.chapterLabel {
+  @include label-text;
+  color: $text-muted;
+}
+
+.heading {
+  font-family: $font-display;
+  font-size: $text-4xl;
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: $text-primary;
+  margin-bottom: $space-2xl;
+}
+
+.accent {
+  color: $color-lavender;
+}
+
+.copyBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  max-width: 38ch;
+  margin-bottom: $space-2xl;
+}
+
+.openingStatement {
+  font-family: $font-display;
+  font-size: $text-xl;
+  font-weight: 400;
+  line-height: 1.35;
+  color: $text-primary;
+}
+
+.supportingCopy {
+  font-family: $font-body;
+  font-size: $text-base;
+  font-weight: 300;
+  line-height: 1.75;
+  color: $text-secondary;
+}
+
+.editorialCaption {
+  @include label-text;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: $text-muted;
+  padding-top: $space-lg;
+  border-top: 1px solid $border-subtle;
+  max-width: 38ch;
+}
+
+// ─── Right Column ───
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+}
+
+.interestList {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid $border-subtle;
+}
+
+.interestItem {
+  border-bottom: 1px solid $border-subtle;
+  transition: border-color $duration-fast ease;
+
+  &.activeItem {
+    border-bottom-color: $border-accent;
+
+    .itemNumber {
+      color: $color-lavender;
+      opacity: 1;
+    }
+
+    .itemTitle {
+      color: $text-primary;
+      opacity: 1;
+    }
+
+    .itemLine {
+      width: 28px;
+      background: $color-lavender;
+    }
+  }
+}
+
+.itemButton {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: $space-lg 0;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.itemHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-lg;
+}
+
+.itemNumber {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  letter-spacing: 0.1em;
+  color: $text-muted;
+  opacity: 0.65;
+  min-width: 2.2ch;
+  transition: color 250ms ease, opacity 250ms ease;
+}
+
+.itemTitle {
+  font-family: $font-display;
+  font-size: $text-2xl;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: $text-primary;
+  opacity: 0.45;
+  flex: 1;
+  transition: opacity 250ms ease, color 250ms ease;
+}
+
+.itemLine {
+  width: 10px;
+  height: 1px;
+  background: $border-subtle;
+  flex-shrink: 0;
+  transition: width 250ms $ease-out-expo, background-color 250ms ease;
+}
+
+.itemDetails {
+  overflow: hidden;
+}
+
+.itemDetailsInner {
+  padding: 0 0 $space-xl calc(2.2ch + #{$space-lg});
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+
+  @include respond-below($bp-tablet) {
+    padding-left: 0;
+  }
+}
+
+.itemDescription {
+  font-family: $font-body;
+  font-size: $text-sm;
+  line-height: 1.75;
+  color: $text-secondary;
+  max-width: 56ch;
+}
+
+.itemMeta {
+  @include label-text;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: $color-lavender;
+}
+
+// ─── Visual Preview Frame ───
+.desktopPreview {
+  display: none;
+
+  @include respond-above($bp-desktop) {
+    display: block;
+  }
+}
+
+.mobilePreview {
+  display: block;
+  margin-top: $space-sm;
+
+  @include respond-above($bp-desktop) {
+    display: none;
+  }
+}
+
+.previewFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: $color-obsidian;
+  border: 1px solid $border-subtle;
+  overflow: hidden;
+}
+
+.previewMotion {
+  position: absolute;
+  inset: 0;
+}
+
+.visualCanvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: $color-obsidian;
+}
+
+.visualSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.filmGrain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+.previewCaption {
+  position: absolute;
+  bottom: $space-md;
+  left: $space-md;
+  right: $space-md;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-md;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.previewIndex {
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  color: $color-lavender;
+  letter-spacing: 0.1em;
+  background: rgba(8, 9, 11, 0.72);
+  padding: 2px $space-sm;
+  border: 1px solid $border-subtle;
+}
+
+.previewMeta {
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: $text-secondary;
+  background: rgba(8, 9, 11, 0.72);
+  padding: 2px $space-sm;
+  border: 1px solid $border-subtle;
+  text-transform: uppercase;
+}
+
+// ─── Visual 01: Anime & Stories ───
+.animeScene {
+  position: absolute;
+  inset: 0;
+}
+
+.animeSkyGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 60% 62%,
+    rgba(181, 166, 255, 0.12) 0%,
+    transparent 55%
+  );
+  pointer-events: none;
+}
+
+// ─── Visual 02: Gaming ───
+.gamingBackdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(255, 59, 70, 0.08) 0%,
+    rgba(21, 22, 27, 0.9) 65%,
+    $color-obsidian 100%
+  );
+}
+
+.gamingParallaxLayer {
+  position: absolute;
+  inset: -16px;
+}
+
+.gamingFogDrift {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(181, 166, 255, 0.06) 50%,
+    transparent 100%
+  );
+}
+
+// ─── Visual 03: Music & Solitude ───
+.musicBackdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(181, 166, 255, 0.08) 0%,
+    $color-obsidian 72%
+  );
+}
+
+.musicStage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 $space-2xl;
+}
+
+.frequencyGrid {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  pointer-events: none;
+
+  span {
+    width: 100%;
+    height: 1px;
+    background: rgba(241, 240, 235, 0.05);
+  }
+}
+
+.waveformBars {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(4px, 1vw, 9px);
+  width: 100%;
+  height: 56%;
+}
+
+.waveBar {
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to top,
+    rgba(181, 166, 255, 0.25),
+    $color-lavender,
+    rgba(241, 240, 235, 0.8)
+  );
+  transform-origin: center;
+  box-shadow: 0 0 10px rgba(181, 166, 255, 0.25);
+}
+
+.waveCurve {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+// ─── Visual 04: Curiosity ───
+.curiosityBackdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(181, 166, 255, 0.07) 0%,
+    rgba(21, 22, 27, 0.6) 45%,
+    $color-obsidian 85%
+  );
+}
+
+@include reduced-motion {
+  .itemTitle,
+  .itemNumber,
+  .itemLine {
+    transition: none !important;
+  }
+}

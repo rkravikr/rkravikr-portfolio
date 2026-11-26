@@ -1,18 +1,24 @@
 import type { MetadataRoute } from 'next';
-
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : 'https://rkravikr-portfolio.vercel.app');
+import { projects } from '@/data/portfolio';
+import { siteUrl } from '@/lib/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+
+  const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
+    url: `${siteUrl}/projects/${project.id}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }));
+
   return [
     {
-      url: baseUrl,
-      lastModified: new Date(),
+      url: siteUrl,
+      lastModified: now,
       changeFrequency: 'monthly',
       priority: 1,
     },
+    ...projectRoutes,
   ];
 }

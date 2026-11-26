@@ -2,10 +2,11 @@
 
 import { useRef, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { projects } from '@/data/portfolio';
-import { ExternalLink, Github } from 'lucide-react';
+import { ArrowRight, ExternalLink, Github } from 'lucide-react';
 import styles from './Projects.module.scss';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,7 +19,6 @@ export default function Projects() {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      // Section header
       gsap.fromTo(
         `.${styles.sectionHeading}`,
         { y: 60, opacity: 0 },
@@ -35,7 +35,6 @@ export default function Projects() {
         }
       );
 
-      // Each project card
       const cards = sectionRef.current?.querySelectorAll(`.${styles.projectCard}`);
       cards?.forEach((card) => {
         gsap.fromTo(
@@ -79,69 +78,103 @@ export default function Projects() {
               className={`${styles.projectCard} ${index === 0 ? styles.featured : ''}`}
             >
               {/* Project Screenshot Preview */}
-              <div className={styles.visual}>
+              <Link
+                href={`/projects/${project.id}`}
+                className={styles.visual}
+                aria-label={`Open ${project.title} case study`}
+              >
                 <Image
                   src={project.image}
                   alt={`${project.title} — ${project.tagline}`}
                   fill
-                  sizes={index === 0 ? '(max-width: 768px) 100vw, 800px' : '(max-width: 768px) 100vw, 640px'}
+                  sizes={
+                    index === 0
+                      ? '(max-width: 768px) 100vw, 800px'
+                      : '(max-width: 768px) 100vw, 640px'
+                  }
                   className={styles.projectImage}
                   priority={index === 0}
                 />
                 <div
                   className={styles.visualOverlay}
                   style={{
-                    background: `linear-gradient(180deg, transparent 40%, rgba(8, 9, 11, 0.72) 100%)`,
+                    background:
+                      'linear-gradient(180deg, transparent 40%, rgba(8, 9, 11, 0.72) 100%)',
                   }}
                 />
-                <span className={styles.projectIndex}>
-                  0{index + 1}
-                </span>
-              </div>
+                <span className={styles.projectIndex}>0{index + 1}</span>
+                <span className={styles.projectStatus}>{project.status}</span>
+              </Link>
 
               <div className={styles.cardContent}>
                 <div className={styles.cardMeta}>
-                  <span className={styles.cardCategory}>{project.category}</span>
+                  <span className={styles.cardCategory}>
+                    {project.category} · {project.projectType}
+                  </span>
                   <span className={styles.cardYear}>{project.year}</span>
                 </div>
 
-                <h3 className={styles.cardTitle}>{project.title}</h3>
+                <h3 className={styles.cardTitle}>
+                  <Link href={`/projects/${project.id}`} className={styles.titleLink}>
+                    {project.title}
+                  </Link>
+                </h3>
                 <p className={styles.cardTagline}>{project.tagline}</p>
                 <p className={styles.cardDescription}>{project.description}</p>
 
+                <div className={styles.insights}>
+                  <div className={styles.insightRow}>
+                    <span className={styles.insightLabel}>Problem</span>
+                    <p className={styles.insightText}>{project.problemSummary}</p>
+                  </div>
+                  <div className={styles.insightRow}>
+                    <span className={styles.insightLabel}>Contribution</span>
+                    <p className={styles.insightText}>{project.contributionSummary}</p>
+                  </div>
+                </div>
+
                 <div className={styles.techStack}>
-                  {project.tech.map((t) => (
+                  {project.tech.slice(0, 5).map((t) => (
                     <span key={t} className={styles.techItem}>
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <p className={styles.narrative}>{project.narrative}</p>
-
                 <div className={styles.cardLinks}>
-                  <a
-                    href={project.repo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.cardLink}
-                    aria-label={`View ${project.title} source on GitHub`}
+                  <Link
+                    href={`/projects/${project.id}`}
+                    className={`${styles.cardLink} ${styles.caseStudyLink}`}
                   >
-                    <Github size={16} />
-                    <span>Source</span>
-                  </a>
+                    <span>
+                      {project.hasFullCaseStudy ? 'Case Study' : 'Details'}
+                    </span>
+                    <ArrowRight size={14} />
+                  </Link>
+
                   {project.live && (
                     <a
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`${styles.cardLink} ${styles.liveLinkStyle}`}
-                      aria-label={`View ${project.title} live`}
+                      aria-label={`View ${project.title} live demo`}
                     >
-                      <ExternalLink size={16} />
-                      <span>Live</span>
+                      <ExternalLink size={14} />
+                      <span>Live Demo</span>
                     </a>
                   )}
+
+                  <a
+                    href={project.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.cardLink}
+                    aria-label={`View ${project.title} source code on GitHub`}
+                  >
+                    <Github size={14} />
+                    <span>Source Code</span>
+                  </a>
                 </div>
               </div>
             </article>

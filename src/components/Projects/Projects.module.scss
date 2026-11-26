@@ -97,6 +97,7 @@
 
 // ─── Project Visual ───
 .visual {
+  display: block;
   position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
@@ -126,6 +127,22 @@
   font-size: $text-xs;
   letter-spacing: 0.12em;
   color: $color-lavender;
+  background: rgba(8, 9, 11, 0.78);
+  border: 1px solid $border-subtle;
+  padding: 2px $space-sm;
+  backdrop-filter: blur(8px);
+  z-index: 2;
+}
+
+.projectStatus {
+  position: absolute;
+  bottom: $space-md;
+  right: $space-md;
+  font-family: $font-mono;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $text-secondary;
   background: rgba(8, 9, 11, 0.78);
   border: 1px solid $border-subtle;
   padding: 2px $space-sm;
@@ -169,6 +186,16 @@
   line-height: 1.2;
 }
 
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color $duration-fast ease;
+
+  &:hover {
+    color: $color-lavender;
+  }
+}
+
 .cardTagline {
   font-family: $font-body;
   font-size: $text-sm;
@@ -182,6 +209,36 @@
   color: $text-secondary;
   line-height: 1.7;
   margin-bottom: $space-lg;
+}
+
+.insights {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  margin-bottom: $space-lg;
+  padding: $space-md;
+  background: rgba(8, 9, 11, 0.45);
+  border: 1px solid $border-subtle;
+}
+
+.insightRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.insightLabel {
+  font-family: $font-mono;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $color-lavender;
+}
+
+.insightText {
+  font-size: 0.8rem;
+  color: $text-secondary;
+  line-height: 1.55;
 }
 
 // ─── Tech Stack ───
@@ -220,7 +277,8 @@
 // ─── Links ───
 .cardLinks {
   display: flex;
-  gap: $space-md;
+  flex-wrap: wrap;
+  gap: $space-sm;
   padding-top: $space-md;
   border-top: 1px solid $border-subtle;
 }
@@ -230,7 +288,7 @@
   align-items: center;
   gap: $space-xs;
   font-family: $font-mono;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: $text-secondary;
@@ -242,6 +300,18 @@
     color: $text-primary;
     border-color: $border-medium;
     background: rgba(241, 240, 235, 0.03);
+  }
+}
+
+.caseStudyLink {
+  color: $color-lavender;
+  border-color: $border-accent;
+  background: rgba(181, 166, 255, 0.07);
+
+  &:hover {
+    background: $color-lavender;
+    color: $color-obsidian;
+    border-color: $color-lavender;
   }
 }
 

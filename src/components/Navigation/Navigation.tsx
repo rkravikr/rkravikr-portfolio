@@ -64,6 +64,8 @@ export default function Navigation() {
     const el = document.querySelector(href);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.href = `/${href}`;
     }
   };
 
