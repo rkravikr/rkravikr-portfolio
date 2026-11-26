@@ -5,19 +5,25 @@ import gsap from 'gsap';
 import styles from './Loader.module.scss';
 
 interface LoaderProps {
-  onComplete: () => void;
+  onComplete?: () => void;
 }
 
 export default function Loader({ onComplete }: LoaderProps) {
   const [progress, setProgress] = useState(0);
+  const [isDone, setIsDone] = useState(false);
   const loaderRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
+    const finish = () => {
+      setIsDone(true);
+      onComplete?.();
+    };
+
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReducedMotion) {
-      onComplete();
+      finish();
       return;
     }
 
@@ -51,7 +57,7 @@ export default function Loader({ onComplete }: LoaderProps) {
     // Exit animation
     const exitTimer = setTimeout(() => {
       const tl = gsap.timeline({
-        onComplete: () => onComplete(),
+        onComplete: () => finish(),
       });
 
       timelineRef.current = tl;
@@ -66,7 +72,7 @@ export default function Loader({ onComplete }: LoaderProps) {
 
     // Safety timeout — never block content more than 3s
     const safetyTimer = setTimeout(() => {
-      onComplete();
+      finish();
     }, 3000);
     timers.push(safetyTimer);
 
@@ -75,6 +81,8 @@ export default function Loader({ onComplete }: LoaderProps) {
       timelineRef.current?.kill();
     };
   }, [onComplete]);
+
+  if (isDone) return null;
 
   return (
     <div ref={loaderRef} className={styles.loader} aria-hidden="true">

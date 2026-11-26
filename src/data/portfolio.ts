@@ -71,6 +71,7 @@ export interface Project {
   tech: string[];
   repo: string;
   live?: string;
+  image: string;
   narrative: string;
   features: string[];
   color: string;
@@ -88,6 +89,7 @@ export const projects: Project[] = [
     tech: ['Next.js', 'TypeScript', 'Supabase'],
     repo: 'https://github.com/rkravikr/campus-core',
     live: 'https://campus-core-jet.vercel.app/',
+    image: '/images/campus-core.png',
     narrative:
       'Demonstrates how a broad problem can be broken into related product modules and implemented as a cohesive application.',
     features: [
@@ -110,6 +112,7 @@ export const projects: Project[] = [
     category: 'Developer Tool',
     tech: ['Next.js', 'React', 'Tailwind CSS', 'shadcn/ui', 'Framer Motion'],
     repo: 'https://github.com/rkravikr/calcify-mastery',
+    image: '/images/calcify-mastery.png',
     narrative:
       'Shows how a collection of small, focused tools can become a coherent utility product.',
     features: [
@@ -132,6 +135,7 @@ export const projects: Project[] = [
     category: 'E-Commerce',
     tech: ['React', 'Vite', 'Node.js', 'Express.js', 'PostgreSQL', 'Prisma', 'Cloudinary'],
     repo: 'https://github.com/rkravikr/shree-bags',
+    image: '/images/shree-bags.png',
     narrative:
       'Shows how software can address a practical business need through a focused storefront and manageable product catalog.',
     features: [
@@ -154,6 +158,7 @@ export const projects: Project[] = [
     category: 'Business Website',
     tech: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     repo: 'https://github.com/rkravikr/ajay-press-v2',
+    image: '/images/ajay-press-v1.png',
     narrative:
       'Demonstrates how a business website can make services easier to understand and customer contact easier to initiate.',
     features: [
@@ -176,6 +181,7 @@ export const projects: Project[] = [
     category: 'Business Website',
     tech: ['React', 'TypeScript', 'Vite'],
     repo: 'https://github.com/rkravikr/nisarga-grand',
+    image: '/images/nisarga-grand.png',
     narrative:
       'Documents business problem-solving through web development for the restaurant industry.',
     features: [

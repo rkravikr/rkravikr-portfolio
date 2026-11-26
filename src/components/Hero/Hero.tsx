@@ -125,11 +125,11 @@ export default function Hero() {
             </a>
           </div>
         </div>
+      </div>
 
-        <div className={styles.scrollIndicator} aria-hidden="true">
-          <div className={styles.scrollLine} />
-          <span className={styles.scrollText}>Scroll</span>
-        </div>
+      <div className={styles.scrollIndicator} aria-hidden="true">
+        <div className={styles.scrollLine} />
+        <span className={styles.scrollText}>Scroll</span>
       </div>
     </section>
   );

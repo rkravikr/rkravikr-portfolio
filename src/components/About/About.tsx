@@ -10,7 +10,11 @@ import styles from './About.module.scss';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function About() {
+interface AboutProps {
+  portraitSrc?: string | null;
+}
+
+export default function About({ portraitSrc }: AboutProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [imgError, setImgError] = useState(false);
 
@@ -147,15 +151,25 @@ export default function About() {
               <div className={`${styles.cornerMarker} ${styles.bottomRight}`} />
 
               <div className={styles.portraitImageWrapper}>
-                {!imgError ? (
-                  <Image
-                    src="/images/ravi-portrait.jpg"
-                    alt={`${profile.name} — ${profile.title}`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 420px"
-                    className={styles.portraitImage}
-                    onError={() => setImgError(true)}
-                  />
+                {portraitSrc && !imgError ? (
+                  <>
+                    <Image
+                      src={portraitSrc}
+                      alt={`${profile.name} — ${profile.title}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 420px"
+                      className={styles.portraitImage}
+                      priority
+                      onError={() => setImgError(true)}
+                    />
+                    <div className={styles.portraitVignette} aria-hidden="true" />
+                    <div className={styles.portraitAtmosphere} aria-hidden="true" />
+                    <div className={styles.portraitGrain} aria-hidden="true" />
+                    <div className={styles.portraitHud} aria-hidden="true">
+                      <span className={styles.hudDot} />
+                      <span>12.97° N · 77.59° E</span>
+                    </div>
+                  </>
                 ) : (
                   <div className={styles.portraitPlaceholder}>
                     <div className={styles.placeholderHeader}>
@@ -173,7 +187,7 @@ export default function About() {
 
                     <div className={styles.placeholderFooter}>
                       <span className={styles.placeholderHint}>
-                        Drop photo into: /public/images/ravi-portrait.jpg
+                        From the void to the things I build.
                       </span>
                     </div>
                   </div>

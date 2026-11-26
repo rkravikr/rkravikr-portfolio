@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { projects } from '@/data/portfolio';
@@ -75,25 +76,27 @@ export default function Projects() {
           {projects.map((project, index) => (
             <article
               key={project.id}
-              className={`${styles.projectCard} ${index < 2 ? styles.featured : ''}`}
+              className={`${styles.projectCard} ${index === 0 ? styles.featured : ''}`}
             >
-              {/* Abstract visual placeholder */}
-              <div
-                className={styles.visual}
-                style={{
-                  background: `linear-gradient(135deg, ${project.color}10, ${project.color}05, transparent)`,
-                }}
-              >
-                <div className={styles.visualInner}>
-                  <span className={styles.projectInitial}>
-                    {project.title.charAt(0)}
-                  </span>
-                  <div className={styles.visualGrid}>
-                    {project.features.slice(0, 4).map((f, i) => (
-                      <span key={i} className={styles.visualFeature}>{f}</span>
-                    ))}
-                  </div>
-                </div>
+              {/* Project Screenshot Preview */}
+              <div className={styles.visual}>
+                <Image
+                  src={project.image}
+                  alt={`${project.title} — ${project.tagline}`}
+                  fill
+                  sizes={index === 0 ? '(max-width: 768px) 100vw, 800px' : '(max-width: 768px) 100vw, 640px'}
+                  className={styles.projectImage}
+                  priority={index === 0}
+                />
+                <div
+                  className={styles.visualOverlay}
+                  style={{
+                    background: `linear-gradient(180deg, transparent 40%, rgba(8, 9, 11, 0.72) 100%)`,
+                  }}
+                />
+                <span className={styles.projectIndex}>
+                  0{index + 1}
+                </span>
               </div>
 
               <div className={styles.cardContent}>
