@@ -134,24 +134,18 @@
 .linkCard {
   display: flex;
   align-items: center;
-  gap: $space-lg;
-  padding: $space-xl;
+  gap: $space-md;
+  padding: $space-md $space-lg;
   background: $surface-elevated;
   border: 1px solid $border-subtle;
   transition: all $duration-base $ease-out-expo;
   text-decoration: none;
   opacity: 0;
 
-  @include respond-above($bp-tablet) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: $space-lg;
-  }
-
   &:hover {
     border-color: $border-accent;
     background: $surface-elevated-2;
-    transform: translateY(-4px);
+    transform: translateY(-3px);
 
     .linkArrow {
       transform: translate(2px, -2px);
@@ -170,12 +164,11 @@
   }
 }
 
-.linkTop {
-  display: flex;
+.emailActions {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  gap: $space-md;
+  gap: $space-sm;
+  flex-shrink: 0;
 }
 
 .copyBtn {

@@ -60,6 +60,43 @@ export const profile = {
       description: 'Test, iterate, and improve based on feedback, limitations, and real-world usage.',
     },
   ],
+  beyond: {
+    statement: [
+      'Not everything needs to be productive.',
+      'Some things are simply worth experiencing. Stories that stay long after the screen fades, worlds worth getting lost in, and ideas that lead somewhere unexpected.',
+      "There's more to me than what I build.",
+    ],
+    entries: [
+      {
+        index: '01',
+        title: 'Anime & Stories',
+        summary: 'Appreciation for storytelling, characters, and emotions.',
+        detail:
+          'Drawn to narratives with quiet depth, layered characters, and visual atmosphere that lingers.',
+      },
+      {
+        index: '02',
+        title: 'Gaming',
+        summary: 'Strategy, exploration, and immersive worlds.',
+        detail:
+          'Enjoying deliberate systems, atmospheric world-building, and problem-solving under pressure.',
+      },
+      {
+        index: '03',
+        title: 'Music & Solitude',
+        summary: 'A quieter, introspective space.',
+        detail:
+          'Late-night soundtracks that slow down the pace and leave room for clear thought.',
+      },
+      {
+        index: '04',
+        title: 'Curiosity',
+        summary: 'Exploring ideas, experimenting, and learning beyond work.',
+        detail:
+          'Following tangential rabbit holes—from visual direction to how everyday tools are crafted.',
+      },
+    ],
+  },
 } as const;
 
 export interface Project {

@@ -179,7 +179,7 @@ export default function Contact() {
     <section ref={sectionRef} className={styles.contact} id="contact">
       <div className={styles.container}>
         <div className={styles.label}>
-          <span className={styles.chapterNum}>04</span>
+          <span className={styles.chapterNum}>05</span>
           <span>The Next Signal</span>
         </div>
 
@@ -215,25 +215,25 @@ export default function Contact() {
                 className={`${styles.linkCard} ${styles.emailCard}`}
                 aria-label="Send email"
               >
-                <div className={styles.linkTop}>
-                  <div className={styles.linkIcon}>
-                    <Mail size={22} />
-                  </div>
+                <div className={styles.linkIcon}>
+                  <Mail size={18} />
+                </div>
+                <div className={styles.linkInfo}>
+                  <span className={styles.linkLabel}>Email</span>
+                  <span className={styles.linkValue}>{emailAddress}</span>
+                </div>
+                <div className={styles.emailActions}>
                   <button
                     type="button"
                     onClick={handleCopyEmail}
                     className={styles.copyBtn}
                     aria-label="Copy email address"
                   >
-                    {copied ? <Check size={13} /> : <Copy size={13} />}
+                    {copied ? <Check size={12} /> : <Copy size={12} />}
                     <span>{copied ? "Copied" : "Copy"}</span>
                   </button>
+                  <ArrowUpRight size={15} className={styles.linkArrow} />
                 </div>
-                <div className={styles.linkInfo}>
-                  <span className={styles.linkLabel}>Email</span>
-                  <span className={styles.linkValue}>{emailAddress}</span>
-                </div>
-                <ArrowUpRight size={16} className={styles.linkArrow} />
               </a>
 
               <a
@@ -244,13 +244,13 @@ export default function Contact() {
                 aria-label="Visit GitHub profile"
               >
                 <div className={styles.linkIcon}>
-                  <Github size={22} />
+                  <Github size={18} />
                 </div>
                 <div className={styles.linkInfo}>
                   <span className={styles.linkLabel}>GitHub</span>
                   <span className={styles.linkValue}>rkravikr</span>
                 </div>
-                <ArrowUpRight size={16} className={styles.linkArrow} />
+                <ArrowUpRight size={15} className={styles.linkArrow} />
               </a>
 
               <a
@@ -261,13 +261,13 @@ export default function Contact() {
                 aria-label="Visit LinkedIn profile"
               >
                 <div className={styles.linkIcon}>
-                  <Linkedin size={22} />
+                  <Linkedin size={18} />
                 </div>
                 <div className={styles.linkInfo}>
                   <span className={styles.linkLabel}>LinkedIn</span>
                   <span className={styles.linkValue}>rkravikr</span>
                 </div>
-                <ArrowUpRight size={16} className={styles.linkArrow} />
+                <ArrowUpRight size={15} className={styles.linkArrow} />
               </a>
             </div>
           </div>
