@@ -76,7 +76,7 @@ export default function Navigation() {
         aria-label="Main navigation"
       >
         <div className={styles.inner}>
-          <a href="#" className={styles.name} aria-label="Back to top">
+          <a href="#" className={styles.name} aria-label="Ravi Kumar Verma — Back to top">
             {profile.name}
           </a>
 

@@ -21,15 +21,15 @@ export function GET() {
     '## Projects',
     ...projects.map(
       (p) =>
-        `- **${p.title}** (${p.category}): ${p.tagline}. Repo: ${p.repo}${p.live ? ` | Live: ${p.live}` : ''}`
+        `- [${p.title}](${p.live || p.repo}) (${p.category}): ${p.tagline} — [Source](${p.repo})`
     ),
     '',
     '## Links',
-    `- GitHub: ${profile.links.github}`,
-    `- LinkedIn: ${profile.links.linkedin}`,
-    `- Email: ${profile.links.email.replace('mailto:', '')}`,
-    `- Resume: ${profile.links.resume}`,
-    ...(siteUrl ? [`- Full context: ${siteUrl}/llms-full.txt`] : ['- Full context: /llms-full.txt']),
+    `- [GitHub](${profile.links.github})`,
+    `- [LinkedIn](${profile.links.linkedin})`,
+    `- [Email](${profile.links.email})`,
+    `- [Resume](${profile.links.resume})`,
+    ...(siteUrl ? [`- [Full Portfolio Context](${siteUrl}/llms-full.txt)`] : ['- [Full Portfolio Context](/llms-full.txt)']),
   ];
 
   return new Response(lines.join('\n'), {

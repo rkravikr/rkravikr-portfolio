@@ -205,7 +205,7 @@ export default function About({ portraitSrc }: AboutProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.resumeBtnSmall}
-                  aria-label="Download Curriculum Vitae (PDF)"
+                  aria-label="Resume — Download Curriculum Vitae (PDF)"
                 >
                   <Download size={13} />
                   <span>Resume</span>
@@ -237,7 +237,7 @@ export default function About({ portraitSrc }: AboutProps) {
             </div>
 
             <div className={styles.techSnapshot}>
-              <h4 className={styles.techTitle}>Core Technologies</h4>
+              <h3 className={styles.techTitle}>Core Technologies</h3>
               <div className={styles.techGrid}>
                 {profile.skills.frontend.slice(0, 5).map((skill) => (
                   <span key={skill} className={styles.techTag}>
