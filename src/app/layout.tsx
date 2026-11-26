@@ -36,6 +36,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  verification: {
+    google: 'Jl8kMRS-RWuW7m9RY5HP4fCBJh0AKCc-GN17cs0ymnQ',
+  },
   keywords: [
     'Ravi Kumar Verma',
     'Ravi Kumar Verma Developer',
