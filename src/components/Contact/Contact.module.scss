@@ -31,7 +31,7 @@
 .heading {
   font-size: $text-4xl;
   font-weight: 500;
-  margin-bottom: $space-2xl;
+  margin-bottom: $space-3xl;
   opacity: 0;
 }
 
@@ -39,25 +39,95 @@
   color: $color-lavender;
 }
 
+// ─── Split Layout ───
+.splitGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-3xl;
+  align-items: start;
+
+  @include respond-above($bp-desktop) {
+    grid-template-columns: 1.15fr 0.95fr;
+    gap: $space-4xl;
+  }
+}
+
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $space-md $space-xl;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-xs $space-md;
+  background: rgba(181, 166, 255, 0.06);
+  border: 1px solid $border-accent;
+  font-family: $font-mono;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: $color-lavender;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $color-lavender;
+  box-shadow: 0 0 10px rgba(181, 166, 255, 0.85);
+  animation: pulseDot 2.4s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.locationRow {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $text-muted;
+
+  svg {
+    color: $color-lavender;
+    flex-shrink: 0;
+  }
+}
+
 .description {
   font-size: $text-lg;
   color: $text-secondary;
   line-height: 1.8;
-  max-width: 55ch;
-  margin-bottom: $space-4xl;
+  max-width: 52ch;
   opacity: 0;
 }
 
-// ─── Contact Links ───
+// ─── Contact Links (Original 3-Card Layout) ───
 .links {
   display: grid;
   grid-template-columns: 1fr;
   gap: $space-md;
-  max-width: 600px;
 
   @include respond-above($bp-tablet) {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: none;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -75,7 +145,7 @@
   @include respond-above($bp-tablet) {
     flex-direction: column;
     align-items: flex-start;
-    gap: $space-xl;
+    gap: $space-lg;
   }
 
   &:hover {
@@ -91,6 +161,41 @@
     .linkIcon {
       color: $color-lavender;
     }
+  }
+}
+
+.emailCard {
+  @include respond-above($bp-tablet) {
+    grid-column: span 2;
+  }
+}
+
+.linkTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: $space-md;
+}
+
+.copyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  font-family: $font-mono;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $text-secondary;
+  background: $color-obsidian;
+  border: 1px solid $border-subtle;
+  padding: 4px $space-sm;
+  cursor: pointer;
+  transition: all $duration-fast ease;
+
+  &:hover {
+    color: $color-lavender;
+    border-color: $border-accent;
   }
 }
 
@@ -117,12 +222,177 @@
   font-size: $text-sm;
   color: $text-primary;
   font-weight: 400;
+  word-break: break-word;
 }
 
 .linkArrow {
   color: $text-muted;
   transition: all $duration-fast;
   flex-shrink: 0;
+}
+
+// ─── Right Column Form Card ───
+.formCard {
+  position: relative;
+  background: $surface-elevated;
+  border: 1px solid $border-medium;
+  padding: $space-xl;
+  opacity: 0;
+
+  @include respond-above($bp-tablet) {
+    padding: $space-2xl;
+  }
+}
+
+.corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+
+  &.topLeft {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid $color-lavender;
+    border-left: 2px solid $color-lavender;
+  }
+
+  &.topRight {
+    top: -1px;
+    right: -1px;
+    border-top: 2px solid $color-lavender;
+    border-right: 2px solid $color-lavender;
+  }
+
+  &.bottomLeft {
+    bottom: -1px;
+    left: -1px;
+    border-bottom: 2px solid $color-lavender;
+    border-left: 2px solid $color-lavender;
+  }
+
+  &.bottomRight {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid $color-lavender;
+    border-right: 2px solid $color-lavender;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.fieldLabel {
+  @include label-text;
+  font-size: 0.65rem;
+  color: $text-muted;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  background: $color-obsidian;
+  border: 1px solid $border-subtle;
+  color: $text-primary;
+  font-family: $font-body;
+  font-size: $text-sm;
+  padding: $space-md;
+  transition: border-color $duration-fast ease, background-color $duration-fast ease;
+  outline: none;
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  &:focus {
+    border-color: $color-lavender;
+    background: rgba(8, 9, 11, 0.95);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.6;
+}
+
+.submitBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-sm;
+  width: 100%;
+  padding: $space-md $space-xl;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $color-lavender;
+  background: rgba(181, 166, 255, 0.08);
+  border: 1px solid $border-accent;
+  cursor: pointer;
+  transition: all $duration-base $ease-out-expo;
+
+  &:hover:not(:disabled) {
+    background: $color-lavender;
+    color: $color-obsidian;
+    border-color: $color-lavender;
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+.statusMessage {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-sm;
+  padding: $space-sm $space-md;
+  font-family: $font-mono;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  border: 1px solid $border-subtle;
+
+  svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+}
+
+.statusSuccess {
+  color: $color-lavender;
+  border-color: $border-accent;
+  background: rgba(181, 166, 255, 0.06);
+}
+
+.statusError {
+  color: $color-red;
+  border-color: $color-red-dim;
+  background: rgba(255, 59, 70, 0.06);
 }
 
 // ─── Atmospheric Glow ───
@@ -142,8 +412,15 @@
 }
 
 @include reduced-motion {
-  .heading, .description, .linkCard {
+  .heading,
+  .description,
+  .linkCard,
+  .formCard {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .statusDot {
+    animation: none;
   }
 }
