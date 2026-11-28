@@ -24,7 +24,7 @@ export const profile = {
     github: 'https://github.com/rkravikr',
     linkedin: 'https://linkedin.com/in/rkravikr',
     email: 'mailto:ravi292002@gmail.com',
-    resume: 'https://drive.google.com/file/d/1_a2AXWUIdhtoPsD6GFsJZ1ICjhBWWYiw/view?usp=sharing',
+    resume: 'https://drive.google.com/file/d/1wXl2o4lOgStrqYkJamjnxVPFeeJ50DJj/view?usp=sharing',
   },
   skills: {
     frontend: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'HTML', 'CSS', 'Tailwind CSS'],
